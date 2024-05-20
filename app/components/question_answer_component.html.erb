@@ -1,17 +1,15 @@
-<tr style="background: #d3d3d3;" class="text-sm text-gray-700">
-  <td>
+<tr style="background: #e6e6e6;" class="text-sm text-gray-700">
+  <td colspan="4" class="py-3.5 pr-3 pl-6 w-full max-w-0 text-sm text-gray-900 sm:w-auto sm:max-w-none">
     <div>
-      <p>Question: <%= @question_answer.question %> </p>
+      <p><span class="text-gray-500">Question:</span> <%= @question_answer.question %> </p>
       <% if @question_answer.answer %>
-        <p>Answer: <%= @question_answer.answer %> </p>
+        <p><span class="text-gray-500">Answer:</span> <span class="text-green-500"><%= @question_answer.answer %></span></p>
       <% end %>
     </div>
   </td>
   <% if @current_user.is_brand? %>
     <td>
-      <%= link_to @url do %>
-        Respond to question
-      <% end %>
+    <%= render ButtonComponent.new(label: "Respond to Question", url: @url) %>
     </td>
   <% end %>
 </tr>

@@ -17,10 +17,13 @@ class QuestionAnswersController < ApplicationController
   def update
     @question_answer = QuestionAnswer.find(params[:id])
     user = get_current_user
-    question_answer_params.merge!(brand_id: user.id)
 
     respond_to do |format|
-      if @question_answer.update(question_answer_params)
+      if @question_answer.update(
+          ingredient_id: question_answer_params[:ingredient_id],
+          answer: question_answer_params[:answer],
+          brand_id: user.id
+      )
         format.html { redirect_to recipe_url(@question_answer.ingredient.recipe), notice: "Interaction was successfully created." }
         format.json { render :show, status: :ok, location: @question_answer }
       else
