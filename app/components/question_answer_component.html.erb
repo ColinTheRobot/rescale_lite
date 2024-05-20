@@ -1,0 +1,17 @@
+<tr style="background: #d3d3d3;" class="text-sm text-gray-700">
+  <td>
+    <div>
+      <p>Question: <%= @question_answer.question %> </p>
+      <% if @question_answer.answer %>
+        <p>Answer: <%= @question_answer.answer %> </p>
+      <% end %>
+    </div>
+  </td>
+  <% if @current_user.is_brand? %>
+    <td>
+      <%= link_to @url do %>
+        Respond to question
+      <% end %>
+    </td>
+  <% end %>
+</tr>
