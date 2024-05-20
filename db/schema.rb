@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_20_155707) do
 
   create_table "question_answers", force: :cascade do |t|
     t.integer "coman_id", null: false
-    t.integer "brand_id", null: false
+    t.integer "brand_id"
     t.text "question"
     t.text "answer"
     t.datetime "created_at", null: false

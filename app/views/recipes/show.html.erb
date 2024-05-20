@@ -37,7 +37,12 @@
                 <%= ingredient.notes %>
               </td>
               <td class="px-3 py-4 text-sm text-gray-700">
-                <!-- insert "add question" button here for coman users -->
+                <%= render ButtonComponent.new(
+                  label: "Ask Question",
+                  url: new_user_question_answer_path(
+                    get_current_user,
+                  )
+                ) unless get_current_user.is_brand? %>
               </td>
             </tr>
 
