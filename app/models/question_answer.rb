@@ -4,5 +4,5 @@
 class QuestionAnswer < ApplicationRecord
   belongs_to :coman, class_name: 'User'
   belongs_to :brand, class_name: 'User', optional: true
-
+  belongs_to :ingredient
 end

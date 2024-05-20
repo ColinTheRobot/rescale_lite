@@ -25,12 +25,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_20_155707) do
   create_table "question_answers", force: :cascade do |t|
     t.integer "coman_id", null: false
     t.integer "brand_id"
+    t.integer "ingredient_id", null: false
     t.text "question"
     t.text "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_question_answers_on_brand_id"
     t.index ["coman_id"], name: "index_question_answers_on_coman_id"
+    t.index ["ingredient_id"], name: "index_question_answers_on_ingredient_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -50,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_20_155707) do
   end
 
   add_foreign_key "ingredients", "recipes"
+  add_foreign_key "question_answers", "ingredients"
   add_foreign_key "question_answers", "users", column: "brand_id"
   add_foreign_key "question_answers", "users", column: "coman_id"
 end
