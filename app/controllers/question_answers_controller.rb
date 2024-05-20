@@ -10,6 +10,27 @@ class QuestionAnswersController < ApplicationController
     )
   end
 
+  def edit
+    @question_answer = QuestionAnswer.find(params[:id])
+  end
+
+  def update
+    @question_answer = QuestionAnswer.find(params[:id])
+    user = get_current_user
+    question_answer_params.merge!(brand_id: user.id)
+
+    respond_to do |format|
+      if @question_answer.update(question_answer_params)
+        format.html { redirect_to recipe_url(@question_answer.ingredient.recipe), notice: "Interaction was successfully created." }
+        format.json { render :show, status: :ok, location: @question_answer }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @question_answer.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   def create
     user = get_current_user
     question_answer_params.merge!(coman_id: user.id)
@@ -36,7 +57,10 @@ class QuestionAnswersController < ApplicationController
   def question_answer_params
     params.permit(:question).merge(
       ingredient_id: params[:ingredient_id].to_i,
-      question: params.dig(:question_answer, :question) # super unclear why this isn't being allowed by strong params. Ignoring for now I'm sure I just have the form implemented slightly wrong.
+      # super unclear why question/answer aren't being allowed by strong params.
+      # Ignoring but I'm sure I just have the form implemented slightly wrong.
+      question: params.dig(:question_answer, :question),
+      answer: params.dig(:question_answer, :answer)
     )
   end
 end

@@ -1,0 +1,26 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl"><%= @question_answer.question %> </h1>
+
+  <%= form_with(model: @question_answer, url: {action: :update}, class: "contents") do |form| %>
+  <% if @question_answer.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(@question_answer.errors.count, "error") %> prohibited this interaction from being saved:</h2>
+
+      <ul>
+        <% @question_answer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :answer %>
+    <%= form.text_field :answer, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= render ButtonComponent.new(label: "Save") %>
+  </div>
+<% end %>
+</div>

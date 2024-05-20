@@ -44,9 +44,30 @@
                   ),
                 ) unless get_current_user.is_brand? %>
               </td>
+              <tr>
+                <% ingredient.question_answers.each do |question_answer| %> 
+                  <div class="flex flex-direction: column">
+                <td class="px-3 py-4 text-sm text-gray-700">
+                      <div style="border-bottom:1px solid black;">
+                        <p>Question: <%= question_answer.question %> </p>
+                      <% if question_answer.answer %>
+                        <p>Answer: <%= question_answer.answer %> </p>
+                    <% end %>
+                      </div>
+                </td>
+                <td>
+
+                  <% if get_current_user.is_brand? %>
+                  <%= link_to edit_ingredient_question_answer_path(ingredient, question_answer) do %>
+                    Respond to question
+                  <% end %>
+                  <% end %>
+                </td>
+                  <% end %>
+                  </div>
+              </tr>
             </tr>
 
-            <!-- insert q & a rows here -->
           <% end %>
         </tbody>
       </table>

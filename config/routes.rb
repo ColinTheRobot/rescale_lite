@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :ingredients do
-    resources :question_answers, only: [:new, :create, :update, :show]
+    resources :question_answers
   end
   resources :recipes
 
